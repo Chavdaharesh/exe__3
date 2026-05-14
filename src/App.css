@@ -17,6 +17,46 @@
   }
 }
 
+.counter-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.counter-display {
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--accent);
+  min-width: 100px;
+  text-align: center;
+  margin: 0;
+}
+
+.counter-btn {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s, transform 0.1s;
+  cursor: pointer;
+  font-weight: 600;
+
+  &:hover {
+    border-color: var(--accent-border);
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
 .hero {
   position: relative;
 

@@ -21,13 +21,23 @@ function App() {
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+        <div className="counter-container">
+          <button
+            type="button"
+            className="counter-btn"
+            onClick={() => setCount((count) => count - 1)}
+          >
+            Decrement
+          </button>
+          <h2 className="counter-display">{count}</h2>
+          <button
+            type="button"
+            className="counter-btn"
+            onClick={() => setCount((count) => count + 1)}
+          >
+            Increment
+          </button>
+        </div>
       </section>
 
       <div className="ticks"></div>
@@ -85,6 +95,7 @@ function App() {
                 Discord
               </a>
             </li>
+           
             <li>
               <a href="https://x.com/vite_js" target="_blank">
                 <svg
