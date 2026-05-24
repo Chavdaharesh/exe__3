@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import './App.css'
+import './App.scss'
 import Login from './login'
 import Dashboard from './Component/Dashboard'
+import BaseComponent from "bootstrap/js/dist/base-component";
 
 function App() {
   const [count, setCount] = useState(0)
