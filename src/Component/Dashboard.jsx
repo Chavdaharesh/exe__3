@@ -1,57 +1,14 @@
 import { useState } from "react";
 import { FiUser, FiLogOut } from "react-icons/fi";
 import "../App.scss";
+import { Link } from "react-router-dom";
+import Header from "../Pages/Header.jsx";
+import Footer from "../Pages/Footer.jsx";
 
-function Dashboard() {
-    const [searchTerm, setSearchTerm] = useState("");
-
-    const handleSearch = (e) => {
-        e.preventDefault();
-        console.log("Searching for:", searchTerm);
-    };
-
+function Dashboard() {    
     return (
         <>
-            <nav className="navbar navbar-dark bg-dark sticky-top">
-                <div className="container-fluid">
-                    <span className="navbar-brand mb-0 h1">
-                        <span className="text-info fw-bold fs-4">Recipe</span>
-                        <span className="text-danger fw-bold fs-4"> Finder</span>
-                    </span>
-                    
-                    <form className="d-flex me-3" style={{width: '300px'}}>
-                        <input
-                            className="form-control form-control-sm"
-                            type="search"
-                            placeholder="Search recipes..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </form>
-
-                    <div className="d-flex align-items-center gap-3 me-3">
-                        <span className="text-light fw-semibold">Explore</span>
-                    </div>
-
-                    <div className="d-flex align-items-center gap-3 me-3">
-                        <span className="text-light fw-semibold">My Recipes</span>
-                    </div>
-
-                    <div className="d-flex align-items-center gap-3 me-3">
-                        <span className="text-light fw-semibold">Favorites</span>
-                    </div>
-
-                    <div className="d-flex gap-2">
-                        <button className="btn btn-outline-info" type="button" title="Profile">
-                            <FiUser size={20} />
-                        </button>
-                        <button className="btn btn-outline-danger" type="button" title="Logout">
-                            <FiLogOut size={20} />
-                        </button>
-                    </div>
-                </div>
-            </nav>
-
+            <div><Header /></div>
             <div className="container mt-5">
                 <div className="row mb-5">
                     <div className="col-md-12">
@@ -90,6 +47,7 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
+            <div><Footer /></div>
         </>
     );
 }
