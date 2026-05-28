@@ -14,21 +14,21 @@ const Header = () => {
                         <span className="text-danger fw-bold fs-4"> Finder</span>
                     </span>                   
                    
-                    <div className="d-flex align-items-center gap-2 mx-3">
-                        <div className="d-flex align-items-center gap-2 mx-3">
-                            <Link to="/" className="text-light fw-semibold">
+                    <div className="d-flex align-items-center gap-2">
+                        <div className="d-flex align-items-center gap-2 mx-4 rounded">
+                            <Link to="/" className="text-light fw-semibold text-decoration-none p-2 rounded">
                                 Explore
                             </Link>
                         </div>
         
-                        <div className="d-flex align-items-center gap-2 mx-3">
-                            <Link to="/my-recipes" className="text-light fw-semibold">
+                        <div className="d-flex align-items-center gap-2 mx-4">
+                            <Link to="/my-recipes" className="text-light fw-semibold text-decoration-none p-2 rounded">
                                 My Recipes
                             </Link>
                         </div>
 
-                        <div className="d-flex align-items-center gap-2 me-3">
-                            <Link to="/favorites" className="text-light fw-semibold">
+                        <div className="d-flex align-items-center gap-2 me-4">
+                            <Link to="/favorites" className="text-light fw-semibold text-decoration-none p-2 rounded">
                                 Favorites
                             </Link>
                         </div>
