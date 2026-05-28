@@ -6,14 +6,28 @@ import Header from "../Pages/Header.jsx";
 import Footer from "../Pages/Footer.jsx";
 
 function Dashboard() {    
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        console.log("Searching for:",    searchTerm);
+    };
+    
     return (
         <>
-            <div><Header /></div>
+            <div><Header /></div>            
             <div className="container mt-5">
                 <div className="row mb-5">
                     <div className="col-md-12">
                         <h3 className="text-dark mb-3">Welcome to Recipe Finder</h3>
                         <p className="text-muted lead">Discover delicious recipes from around the world.</p>
+                         <input className="w-50"
+                            className="form-control form-control-sm"
+                            type="search"
+                            placeholder="Search recipes..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
                     </div>                    
                 </div>
 
