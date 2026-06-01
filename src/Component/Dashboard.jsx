@@ -1,67 +1,86 @@
-import { useState } from "react";
-import { FiUser, FiLogOut } from "react-icons/fi";
+import { useState, useEffect } from "react";
 import "../App.scss";
 import { Link } from "react-router-dom";
 import Header from "../Pages/Header.jsx";
 import Footer from "../Pages/Footer.jsx";
 
-function Dashboard() {    
+function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
+    const [recipes, setRecipes] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        console.log("Searching for:",    searchTerm);
-    };
-    
+    useEffect(() => {
+        fetch("https://dummyjson.com/recipes")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load recipes: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setRecipes(data.recipes || []);
+                setError(null);
+            })
+            .catch((err) => {
+                console.error(err);
+                setError(err.message || "Unable to load recipes.");
+            })
+            .finally(() => setLoading(false));
+    }, []);
+
+    const filteredRecipes = recipes.filter((recipe) =>
+        recipe.name?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <>
             <div><Header /></div>            
             <div className="container mt-5">
-                <div className="row mb-5">
-                    <div className="col-md-12">
+                <div className="row mb-5 justify-content-center">
+                    <div className="col-md-10">
                         <h3 className="text-dark mb-3">Welcome to Recipe Finder</h3>
                         <p className="text-muted lead">Discover delicious recipes from around the world.</p>
-                         <input className="w-50"
-                            className="form-control form-control-sm"
-                            type="search"
-                            placeholder="Search recipes..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </div>                    
-                </div>
-
-                <div className="row g-4">
-                    <div className="col-md-4">
-                        <div className="card h-100 shadow-sm border-0 hover-shadow">
-                            <div className="card-body">
-                                <h5 className="card-title text-primary">Popular Recipes</h5>
-                                <p className="card-text text-muted">Explore the most trending recipes from our community.</p>
-                                <a href="#" className="btn btn-sm btn-outline-primary">View More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card h-100 shadow-sm border-0 hover-shadow">
-                            <div className="card-body">
-                                <h5 className="card-title text-success">Top Chefs</h5>
-                                <p className="card-text text-muted">Learn from the best chefs and culinary experts.</p>
-                                <a href="#" className="btn btn-sm btn-outline-success">Explore</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card h-100 shadow-sm border-0 hover-shadow">
-                            <div className="card-body">
-                                <h5 className="card-title text-warning">My Favorites</h5>
-                                <p className="card-text text-muted">Manage and access your favorite recipes easily.</p>
-                                <a href="#" className="btn btn-sm btn-outline-warning">View</a>
-                            </div>
-                        </div>
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <input
+                                className="form-control form-control-sm w-50"
+                                type="search"
+                                placeholder="Search recipes..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </form>
                     </div>
                 </div>
             </div>
-            <div><Footer /></div>
+            <div className="container">   
+                    <div className="row g-4">
+                        {filteredRecipes.length > 0 ? (
+                            filteredRecipes.map((recipe) => (
+                                <div key={recipe.id} className="col-md-4">
+                                    <div className="card h-100">
+                                        <img src={recipe.image} className="card-img-top" alt={recipe.name} />
+                                        <div className="card-body d-flex flex-column">
+                                            <h5 className="card-title">{recipe.name}</h5>
+                                            <p className="card-text">{recipe.description}</p>
+                                            <div className="mt-auto">
+                                                <Link to={`/recipe/${recipe.id}`} className="btn btn-dark">
+                                                    View Recipe
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="col-12">
+                                <p className="text-center text-muted">No recipes found.</p>
+                            </div>
+                        )}
+                    </div>
+               
+            </div>
+            <Footer />
         </>
     );
 }
