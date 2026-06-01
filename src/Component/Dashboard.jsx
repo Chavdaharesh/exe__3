@@ -35,9 +35,9 @@ function Dashboard() {
 
     return (
         <>
-            <div><Header /></div>            
+            <Header />            
             <div className="container mt-5">
-                <div className="row mb-5 justify-content-center">
+                <div className="row mb-5 justify-content-center align-items-center">
                     <div className="col-md-10">
                         <h3 className="text-dark mb-3">Welcome to Recipe Finder</h3>
                         <p className="text-muted lead">Discover delicious recipes from around the world.</p>
