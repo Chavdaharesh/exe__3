@@ -29,9 +29,19 @@ function Dashboard() {
             .finally(() => setLoading(false));
     }, []);
 
-    const filteredRecipes = recipes.filter((recipe) =>
-        recipe.name?.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredRecipes = recipes.filter((recipe) =>       
+        recipe.name?.toLowerCase().includes(searchTerm.toLowerCase())        
     );
+
+    const filteredRecipesByMealType = filteredRecipes.filter((recipe) => {
+        const mealType = document.querySelector('select').value;
+        console.log("Selected meal type:", mealType);
+        recipe.mealType = recipe.mealType || "unknown"; 
+        if (mealType === "") {
+            return true; 
+        }
+        return recipe.mealType.toLowerCase() === mealType.toLowerCase();
+    });
 
     return (
         <>
@@ -41,20 +51,39 @@ function Dashboard() {
                     <div className="col-md-10">
                         <h3 className="text-dark mb-3">Welcome to Recipe Finder</h3>
                         <p className="text-muted lead">Discover delicious recipes from around the world.</p>
-                        <form onSubmit={(e) => e.preventDefault()}>
-                            <input
-                                className="form-control form-control-sm w-50"
-                                type="search"
-                                placeholder="Search recipes..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                        </form>
+                        
+                            <form onSubmit={(e) => e.preventDefault()}>  
+                                <div className="row g-2 align-items-center">                          
+                                    <div className="d-flex align-items-start gap-2 col-sm-11">
+                                        <input
+                                            className="form-control form-control-sm w-60"
+                                            type="search"
+                                            placeholder="Search recipes..."
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        />  
+                                    </div>                      
+                                    <div className="d-flex gap-2 col-sm-1 h-25">
+                                        <select className="form-select form-select-sm w-40" 
+                                            aria-label="Select meal type" 
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        >
+                                            <option value="">All</option>
+                                            <option value="breakfast">Breakfast</option>
+                                            <option value="lunch">Lunch</option>
+                                            <option value="dinner">Dinner</option>
+                                            <option value="snack">Snack</option>
+                                            <option value="dessert">Dessert</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>   
+                                             
                     </div>
                 </div>
             </div>
             <div className="container">   
-                    <div className="row g-4">
+                    <div className="row g-4">                       
                         {filteredRecipes.length > 0 ? (
                             filteredRecipes.map((recipe) => (
                                 <div key={recipe.id} className="col-md-4">
