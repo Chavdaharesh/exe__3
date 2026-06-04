@@ -6,6 +6,7 @@ import Footer from "../Pages/Footer.jsx";
 
 function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
+    const [mealType, setMealType] = useState("");
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -29,18 +30,15 @@ function Dashboard() {
             .finally(() => setLoading(false));
     }, []);
 
-    const filteredRecipes = recipes.filter((recipe) =>       
-        recipe.name?.toLowerCase().includes(searchTerm.toLowerCase())        
-    );
+    const filteredRecipes = recipes.filter((recipe) => {
+        const recipeMeal = Array.isArray(recipe.mealType)
+            ? recipe.mealType.join(" ")
+            : String(recipe.mealType ?? "");
 
-    const filteredRecipesByMealType = filteredRecipes.filter((recipe) => {
-        const mealType = document.querySelector('select').value;
-        console.log("Selected meal type:", mealType);
-        recipe.mealType = recipe.mealType || "unknown"; 
-        if (mealType === "") {
-            return true; 
-        }
-        return recipe.mealType.toLowerCase() === mealType.toLowerCase();
+        const matchesMeal = !mealType || recipeMeal.toLowerCase().includes(mealType.toLowerCase());
+        const matchesSearch = !searchTerm || (recipe.name ?? "").toLowerCase().includes(searchTerm.toLowerCase());
+
+        return matchesMeal && matchesSearch;
     });
 
     return (
@@ -64,9 +62,11 @@ function Dashboard() {
                                         />  
                                     </div>                      
                                     <div className="d-flex gap-2 col-sm-1 h-25">
-                                        <select className="form-select form-select-sm w-40" 
-                                            aria-label="Select meal type" 
-                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        <select
+                                            className="form-select form-select-sm w-40"
+                                            aria-label="Select meal type"
+                                            value={mealType}
+                                            onChange={(e) => setMealType(e.target.value)}
                                         >
                                             <option value="">All</option>
                                             <option value="breakfast">Breakfast</option>
