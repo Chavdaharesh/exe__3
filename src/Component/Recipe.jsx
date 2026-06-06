@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Header from "../Pages/Header.jsx";
 import Footer from "../Pages/Footer.jsx";
 
-export default function Recipe() {
+function Recipe() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -90,3 +90,5 @@ export default function Recipe() {
     </>
   );
 }
+
+export default Recipe;

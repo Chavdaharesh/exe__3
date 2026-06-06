@@ -3,6 +3,8 @@ import "../App.scss";
 import { Link } from "react-router-dom";
 import Header from "../Pages/Header.jsx";
 import Footer from "../Pages/Footer.jsx";
+import Recipe from "./Recipe.jsx";
+import MyRecipe from "./myRecipe.jsx";
 
 function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -10,6 +12,7 @@ function Dashboard() {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showMyRecipes, setShowMyRecipes] = useState(false);       
 
     useEffect(() => {
         fetch("https://dummyjson.com/recipes")
@@ -40,6 +43,21 @@ function Dashboard() {
 
         return matchesMeal && matchesSearch;
     });
+
+    const saveRecipe = (recipe) => {
+        const savedRecipes = JSON.parse(localStorage.getItem("myRecipes") || "[]");
+        const updatedRecipes = [...savedRecipes, recipe];
+        if (savedRecipes.some((r) => r.id === recipe.id)) {
+            alert("This recipe is already in your collection.");
+            return;
+        }
+        else {
+                alert("Recipe added to your collection!");
+        }
+        console.log("Saving recipe:", recipe);
+        localStorage.setItem("myRecipes", JSON.stringify(updatedRecipes));
+        setShowMyRecipes(true);
+    }
 
     return (
         <>
@@ -92,11 +110,19 @@ function Dashboard() {
                                         <div className="card-body d-flex flex-column">
                                             <h5 className="card-title">{recipe.name}</h5>
                                             <p className="card-text">{recipe.description}</p>
-                                            <div className="mt-auto">
-                                                <Link to={`/recipe/${recipe.id}`} className="btn btn-dark">
-                                                    View Recipe
-                                                </Link>
+                                            <div className="mt-auto gap-3 d-flex">
+                                                
+                                                    <Link to={`/recipe/${recipe.id}`} className="btn btn-outline-dark">
+                                                        View Recipe
+                                                    </Link>
+
+                                                        <Link className="btn btn-outline-dark" onClick={() => saveRecipe(recipe)}>
+                                                        Add Recipe
+                                                    </Link>
+                                                
+                                                
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

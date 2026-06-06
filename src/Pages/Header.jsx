@@ -3,6 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiUser, FiLogOut } from "react-icons/fi";
 import "../App.scss";
 import { Link } from "react-router-dom";
+import Login from "../login.jsx";
+import Dashboard from "../Component/Dashboard.jsx";
+import Recipe from "../Component/Recipe.jsx";
+import MyRecipe from "../Component/myRecipe.jsx";
 
 const Header = () => {   
 
@@ -26,22 +30,15 @@ const Header = () => {
                                 My Recipes
                             </Link>
                         </div>
-
-                        <div className="d-flex align-items-center gap-2 me-4">
-                            <Link to="/favorites" className="text-light fw-semibold text-decoration-none p-2 rounded">
-                                Favorites
-                            </Link>
-                        </div>
-                    </div>
-                    
+                    </div>                    
 
                     <div className="d-flex gap-2">
-                        <button className="btn btn-outline-info" type="button" title="Profile">
+                        <Link to="/login" className="btn btn-outline-info" type="button" title="Profile">
                             <FiUser size={20} />
-                        </button>
-                        <button className="btn btn-outline-danger" type="button" title="Logout">
+                        </Link>
+                        <Link to="/login" className="btn btn-outline-info" type="button" title="Logout">
                             <FiLogOut size={20} />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </nav>
