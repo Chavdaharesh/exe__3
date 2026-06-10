@@ -105,7 +105,7 @@ function Dashboard() {
                         {filteredRecipes.length > 0 ? (
                             filteredRecipes.map((recipe) => (
                                 <div key={recipe.id} className="col-md-4">
-                                    <div className="card h-100">
+                                    <div className="card h-100 justify-content-center align-items-center">
                                         <img src={recipe.image} className="card-img-top" alt={recipe.name} />
                                         <div className="card-body d-flex flex-column">
                                             <h5 className="card-title">{recipe.name}</h5>
