@@ -14,7 +14,8 @@ function Dashboard() {
     const [error, setError] = useState(null);
     const [showMyRecipes, setShowMyRecipes] = useState(false);       
 
-    useEffect(() => {
+    useEffect(() => {        
+        setLoading(true);
         fetch("https://dummyjson.com/recipes")
             .then((response) => {
                 if (!response.ok) {
@@ -33,6 +34,7 @@ function Dashboard() {
             .finally(() => setLoading(false));
     }, []);
 
+    
     const filteredRecipes = recipes.filter((recipe) => {
         const recipeMeal = Array.isArray(recipe.mealType)
             ? recipe.mealType.join(" ")
@@ -61,6 +63,7 @@ function Dashboard() {
 
     return (
         <>
+        
             <Header />            
             <div className="container mt-5">
                 <div className="row mb-5 justify-content-center align-items-center">
@@ -101,8 +104,14 @@ function Dashboard() {
                 </div>
             </div>
             <div className="container">   
-                    <div className="row g-4">                       
-                        {filteredRecipes.length > 0 ? (
+                    <div className="row g-4">
+                        {loading ? (
+                            <div className="col-12 d-flex justify-content-center align-items-center" style={{ minHeight: "300px" }}>
+                                <div className="spinner-border text-dark" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        ) : filteredRecipes.length > 0 ? (
                             filteredRecipes.map((recipe) => (
                                 <div key={recipe.id} className="col-md-4">
                                     <div className="card h-100 justify-content-center align-items-center">

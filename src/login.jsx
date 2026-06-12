@@ -35,7 +35,7 @@ function Login() {
     if (user) {
       alert('Login successful!');
       localStorage.setItem('loggedInUser', JSON.stringify(user));
-      navigate('/');
+      navigate('/dashboard');
       return;
     }
 

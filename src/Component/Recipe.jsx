@@ -79,7 +79,7 @@ function Recipe() {
                 </ol>
 
                 <div className="mt-4">
-                  <Link to="/" className="btn btn-secondary">Back</Link>
+                  <Link to="/dashboard" className="btn btn-secondary">Back</Link>
                 </div>
               </div>
             </div>

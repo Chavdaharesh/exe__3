@@ -20,7 +20,7 @@ const Header = () => {
                    
                     <div className="d-flex align-items-center gap-2">
                         <div className="d-flex align-items-center gap-2 mx-4 rounded">
-                            <Link to="/" className="text-light fw-semibold text-decoration-none p-2 rounded">
+                            <Link to="/dashboard" className="text-light fw-semibold text-decoration-none p-2 rounded">
                                 Explore
                             </Link>
                         </div>

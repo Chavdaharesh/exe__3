@@ -31,8 +31,10 @@ export default function MyRecipe() {
         });
     }, []);
 
+
     return (
         <>
+        
             <Header />
             <div className="container mt-5">
                 <h2 className="mb-4">My Recipes</h2>
@@ -69,7 +71,7 @@ export default function MyRecipe() {
                 ) : (
                     <div className="text-center text-muted">
                         <p className="mb-2">You haven't added any recipes yet.</p>
-                        <Link to="/" className="btn btn-outline-secondary">Browse Recipes</Link>
+                        <Link to="/dashboard" className="btn btn-outline-secondary">Browse Recipes</Link>
                     </div>
                 )}
             </div>
