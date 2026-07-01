@@ -52,7 +52,7 @@ function Recipe() {
           <div className="col-md-5">
             <div className="card h-100">
               {recipe.image && (
-                <img src={recipe.image} className="card-img-top" alt={recipe.name} />
+                <img src={recipe.image} className="card-img-top img-fluid" alt={recipe.name} />
               )}
             </div>
           </div>

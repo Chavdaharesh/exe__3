@@ -1,8 +1,8 @@
 const Footer = () => {
     return (
-        <footer className="bg-dark text-light sticky-sm-bottom height-50 opacity-85">
+        <footer className="bg-light text-muted sticky-sm-bottom height-50 opacity-85">
             <div className="container">
-                <p className="text-center mb-0 text-small">&copy; 2026 Recipe Finder. All rights reserved.</p>
+                <p className="text-start mb-0 text-small">&copy; 2026 Recipe Finder. All rights reserved.</p>
             </div>
         </footer>
     );

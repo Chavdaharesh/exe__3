@@ -41,18 +41,18 @@ export default function MyRecipe() {
                 {myRecipes.length > 0 ? (
                     <div className="row g-4">
                         {myRecipes.map((recipe) => (
-                            <div key={recipe.id} className="col-md-4">
+                            <div key={recipe.id} className="col-12 col-md-4">
                                 <div className="card h-100">
-                                    <img src={recipe.image} className="card-img-top" alt={recipe.name} />
+                                    <img src={recipe.image} className="card-img-top img-fluid" alt={recipe.name} />
                                     <div className="card-body d-flex flex-column">
                                         <h5 className="card-title">{recipe.name}</h5>
                                         <p className="card-text">{recipe.description}</p>
-                                        <div className="mt-auto d-flex justify-content-center">
-                                            <Link to={`/recipe/${recipe.id}`} className="btn btn-outline-dark">
+                                        <div className="mt-auto d-flex flex-column flex-sm-row gap-2">
+                                            <Link to={`/recipe/${recipe.id}`} className="btn btn-outline-dark flex-fill">
                                                 View Recipe
                                             </Link>
                                             <button
-                                                className="btn btn-outline-dark ms-2"
+                                                className="btn btn-outline-dark flex-fill"
                                                 data-id={recipe.id}
                                                 onClick={() => {
                                                     const updatedRecipes = myRecipes.filter((r) => r.id !== recipe.id);
